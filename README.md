@@ -27,9 +27,8 @@ Everything here is implemented in Python 3. To use these notebooks, you will als
 
 >1. [Pytorch](https://pytorch.org)
 >2. [Graphviz](http://graphviz.readthedocs.io/en/stable/manual.html#installation) (for drawing the extracted PDFAs)
->3. [NumPy and SciPy](https://scipy.org/install.html) (for Scikit-Learn)
->4. [Scikit-Learn](http://scikit-learn.org/stable/install.html) (for the SVM classifier)
->5. [Matplotlib](https://matplotlib.org/users/installing.html) (for plots of our networks' loss during training)
+>3. [NumPy and SciPy](https://scipy.org/install.html) 
+>4. [Matplotlib](https://matplotlib.org/users/installing.html) (for network printouts during training)
 
 If you are on a mac using Homebrew, then NumPy, SciPy, Scikit-Learn, Matplotlib, Graphviz and Jupyter should all hopefully 
 work with `brew install numpy`, `brew install scipy`, etc. 
