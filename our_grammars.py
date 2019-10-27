@@ -7,14 +7,14 @@ def assert_and_give_pdfa(informal_name,transitions,transition_weights,alphabet,i
 	return PDFA(informal_name=informal_name,transitions_and_weights=(transitions,transition_weights),initial_state=initial_state)
 
 
-def wgy1(): # wgy2 in personal
+def uhl1(): # uhl2 in personal
 # description: (for max_as = 3)
 # just a counting pdfa. alphabet is a,b. normally it prefers as,
 # but whenever length(w)%(2+3+4) = 1, 4, or 8, it prefers bs. 
 # (i.e. preference loops over: a, b, aa, b, aaa, b) 
 # (for other max_as: loop carries on up to max_as a's in a row before the last b)
 	max_as=3
-	informal_name = "wgy_1"
+	informal_name = "uhl_1"
 	transitions = {}
 	transition_weights = {}
 
@@ -31,11 +31,11 @@ def wgy1(): # wgy2 in personal
 		j+=1 # skip the b
 	return assert_and_give_pdfa(informal_name,transitions,transition_weights,alphabet,0)
 
-def wgy2(): # wgy3 in personal
+def uhl2(): # uhl3 in personal
 	# description:
 	# just a counting pdfa. preference loops over all tokens.
 	num_letters=5
-	informal_name = "wgy_2"
+	informal_name = "uhl_2"
 	transitions = {}
 	transition_weights = {}
 	alphabet =  list(range(num_letters))
@@ -46,13 +46,13 @@ def wgy2(): # wgy3 in personal
 		transition_weights[i][alphabet[i]] += 0.5 # give another 0.5 to this state's 'main' letter
 	return assert_and_give_pdfa(informal_name,transitions,transition_weights,alphabet,0)
 
-def wgy3(): # wgy7 in personal
+def uhl3(): # uhl7 in personal
 	# description:
 	# like tomita 5, but accept/reject is replaced with mild preference for a's or b's: 
 	# whenever both #a(w) and #b(w) are odd, b is more likely, the rest of the time a is more likely
 	hi=0.525
 	lo=0.425
-	informal_name = "wgy_3"
+	informal_name = "uhl_3"
 	transitions = {}
 	transition_weights = {}
 	alphabet = [0,1]

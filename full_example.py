@@ -1,6 +1,6 @@
 # TODO: move to process_time or time or something b/c clock is deprecated
 
-from our_grammars import wgy1, wgy2, wgy3
+from our_grammars import uhl1, uhl2, uhl3
 from Helper_Functions import prepare_directory, overwrite_file, clean_val
 from LanguageModel import LanguageModel
 from Learner import learn
@@ -14,15 +14,15 @@ from SpectralReconstruction import spectral_reconstruct, make_P_S
 import os
 import ast
 import numpy as np
-# example: going to train an RNN on WGY1, extract from it with weighted lstar, spectral, and ngrams 
+# example: going to train an RNN on UHL1, extract from it with weighted lstar, spectral, and ngrams 
 # (for alergia - you will have to download and use the flexfringe toolkit), and then evaluate WER 
 # and NDCG for each against the RNN
 
 
 parser = argparse.ArgumentParser()
-# language (either spice or wgy, it wont do both)
+# language (either spice or uhl, it wont do both)
 parser.add_argument('--spice-example',action='store_true')
-parser.add_argument('--wgy-num',type=int,default=-1)
+parser.add_argument('--uhl-num',type=int,default=-1)
 
 # train params
 parser.add_argument('--RNNClass',type=str,default="LSTM",choices=["LSTM","GRU"])
@@ -33,8 +33,8 @@ parser.add_argument('--dropout',type=float,default=0.5)
 parser.add_argument('--learning-rates',type=ast.literal_eval,default=[0.01, 0.008, 0.006, 0.004, 0.002, 0.001, 0.0005, 0.0001, 5e-05])
 parser.add_argument('--iterations-per-learning-rate',type=int,default=10)
 parser.add_argument('--batch-size',type=int,default=100)
-parser.add_argument('--total-generated-train-samples',type=int,default=5000,help="only relevant when its going to make samples for you, ie when using a wgy") 
-parser.add_argument('--max-generated-train-sample-len',type=int,default=200,help="only relevant when its going to make samples for you, ie when using a wgy") 
+parser.add_argument('--total-generated-train-samples',type=int,default=5000,help="only relevant when its going to make samples for you, ie when using a uhl") 
+parser.add_argument('--max-generated-train-sample-len',type=int,default=200,help="only relevant when its going to make samples for you, ie when using a uhl") 
 
 # # spectral learning params
 parser.add_argument('--k-ranges',type=ast.literal_eval,default='[(1,31),(40,101,10)]')
@@ -73,8 +73,8 @@ parser.add_argument('--code-test',action='store_true')
 
 args = parser.parse_args()
 
-if not args.spice_example and None is args.wgy_num:
-	print("pick a spice or wgy")
+if not args.spice_example and None is args.uhl_num:
+	print("pick a spice or uhl")
 	exit()
 
 if args.code_test:
@@ -99,7 +99,7 @@ args.k_list = []
 for t in args.k_ranges:
 	args.k_list += list(range(*t))
 
-wgy = {1:wgy1(),2:wgy2(),3:wgy3()}
+uhl = {1:uhl1(),2:uhl2(),3:uhl3()}
 folder = "results"
 prepare_directory(folder)
 
@@ -131,7 +131,7 @@ if args.spice_example:
 	rnn_folder = folder + "/"+ informal_name+"_"+str(process_time())
 	prepare_directory(rnn_folder)
 else:
-	target = wgy[args.wgy_num]
+	target = uhl[args.uhl_num]
 	lm = LanguageModel(target)
 	informal_name = target.informal_name
 	rnn_folder = folder + "/"+ informal_name + "_" + str(process_time())
@@ -335,7 +335,7 @@ def get_ndcg_samples_and_target():
 	with open(rnn_folder+"/ndcg_samples.txt","w") as f:
 		print(len(prefs),len(lm.input_alphabet),file=f)
 		for p in prefs:
-			print(len(p)," ".join([str(t) for t in p]),file=f) # this is fine for the spices and for the wgys, where the tokens are ints. make sure to read it right too!
+			print(len(p)," ".join([str(t) for t in p]),file=f) # this is fine for the spices and for the uhls, where the tokens are ints. make sure to read it right too!
 	target_filename = rnn_folder + "/ndcg_target.txt"
 	with open(target_filename,"w") as f:
 		print(args.ndcg_k,file=f) # store what ndcg_k is being made
