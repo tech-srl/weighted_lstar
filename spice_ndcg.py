@@ -1,4 +1,4 @@
-# original file taken from SPiCe competition with credit as below. Have modified it somewhat 
+# original file taken from SPiCe competition https://spice.lis-lab.fr with credit as below. Have modified it somewhat 
 # for my needs. Might not work for original SPiCe ndcg files.
 
 # -*- coding: utf-8 -*-
