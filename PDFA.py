@@ -46,7 +46,7 @@ class PDFA: #deterministic probabilistic WFA that just has the states listed out
 			w = self.transition_weights[s][self.end_token]
 			label = str(clean_val(self.transition_weights[s][self.end_token],precision))
 			if add_state_name:
-				label = str(s)+" : "+label
+				label = str(s)+": "+label
 			return label
 		def state_shape(s):
 			return 'hexagon' if s == self.initial_state() else 'circle'
@@ -66,7 +66,7 @@ class PDFA: #deterministic probabilistic WFA that just has the states listed out
 					continue
 				add_transition_label(str(self.transitions[s][a]),transition_label(s,a))
 			for target in transition_labels:
-				g.edge(str(s),str(target),transition_labels[target])
+				g.edge(str(s),str(target)," "+transition_labels[target]+ " ")
 
 		filename = 'img/automaton'+str(time()) if None is filename else filename
 		img_filename = g.render(filename=filename)
