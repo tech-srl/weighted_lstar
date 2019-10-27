@@ -55,9 +55,18 @@ class PDFA: #deterministic probabilistic WFA that just has the states listed out
 		[g.node(str(s),label=state_label(s),shape=state_shape(s)) for s in states if not s==self.not_a_state] # don't draw non state
 
 		for s in states:
+			transition_labels = {} # target : label
+			def add_transition_label(target,label):
+				if not target in transition_labels:
+					transition_labels[target] = label
+				else:
+					transition_labels[target] += ", " + label
 			for a in self.input_alphabet:
-				if self.transition_weights[s][a]>0: # don't draw trash
-					g.edge(str(s),str(self.transitions[s][a]),label=transition_label(s,a))
+				if self.transition_weights[s][a]<=0: # don't draw trash
+					continue
+				add_transition_label(str(self.transitions[s][a]),transition_label(s,a))
+			for target in transition_labels:
+				g.edge(str(s),str(target),transition_labels[target])
 
 		filename = 'img/automaton'+str(time()) if None is filename else filename
 		img_filename = g.render(filename=filename)
