@@ -9,11 +9,13 @@ wgy_ndcg_k = 2 # have to think of better place/way to store this
 class LanguageModel:
 	def __init__(self,model):
 		for attr in ["initial_state","next_state","state_probs_dist","state_char_prob"]:
-			if not hasattr(model,attr) and callable(getattr(model,attr)):
+			if not (hasattr(model,attr) and callable(getattr(model,attr))):
 				print("model",str(model)[:30],"is missing attribute:",attr)
 				raise OhHeck()
 		self.model = model
-		[steal_attr(self,model,attr) for attr in ["input_alphabet","end_token","internal_alphabet","name","informal_name"]]
+		[steal_attr(self,model,attr) for attr in ["input_alphabet","end_token","internal_alphabet"]]
+		self.informal_name = model.informal_name if hasattr(model,"informal_name") else "unknown language model"
+		self.name = model.name if hasattr(model,"name") else "unknown language model"
 		self.int2char = self.internal_alphabet # its a list from def of internal_alphabet
 		self.char2int = {c:i for i,c in enumerate(self.int2char)}
 
