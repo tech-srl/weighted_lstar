@@ -32,9 +32,6 @@ class WFA:
 	def next_state(self,s,t):
 		return s@self.A[t]
 
-	def state_hash(self,state):
-		return str(state) # np arrays will show the array values in the list
-
 	def _state_from_pref(self,pref,initial_state=None):
 		s = initial_state if not None is initial_state else self.initial_state()
 		for a in pref:

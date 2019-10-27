@@ -8,7 +8,7 @@ wgy_ndcg_k = 2 # have to think of better place/way to store this
 
 class LanguageModel:
 	def __init__(self,model):
-		for attr in ["initial_state","next_state","state_probs_dist","state_char_prob","state_hash"]:
+		for attr in ["initial_state","next_state","state_probs_dist","state_char_prob"]:
 			if not hasattr(model,attr) and callable(getattr(model,attr)):
 				print("model",str(model)[:30],"is missing attribute:",attr)
 				raise OhHeck()
@@ -22,9 +22,6 @@ class LanguageModel:
 
 	def next_state(self,state,char):
 		return self.model.next_state(state,char)
-
-	def state_hash(self,state):
-		return self.model.state_hash(state)
 
 ########## 
 # theoretically, of _state_probs_dist, _state_char_prob, and weight, only really need one. 

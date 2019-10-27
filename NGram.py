@@ -51,9 +51,6 @@ class NGram:
 	def next_state(self,state,char):
 		return (state+(char,))[1:] #first add last char then take away first, to correctly handle case when state is empty (tho tbh can also handle that with an if)
 
-	def state_hash(self,state):
-		return state
-
 	def state_probs_dist(self,state):
 		if not state in self._state_probs_dist:
 			return self.unseen_distribution

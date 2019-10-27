@@ -345,9 +345,6 @@ class RNNTokenPredictor:
 	def next_state(self,state,char):
 		return self.state_from_sequence([char],state=state)
 
-	def state_hash(self,state):
-		return str(state_to_lists(state))
-	
 	def state_probs_dist(self,state):
 		assert state.size()[1] == 1 if self.rnn_module.RNNClass=="GRU" else state[0].size(1)==1, "state_probs_dist called with state with batch size not 1 (state size: "+str(state.size())+")"
 		dist = self.rnn_module.state_to_distribution(state) # batch_size X num_output_tokens
