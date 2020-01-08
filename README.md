@@ -55,7 +55,17 @@ In particular for the spectral extraction, implementing the function `weights_fo
 ### Citation
 You can cite this work using:
 
-TODO
+@incollection{NIPS2019_9062,
+title = {Learning Deterministic Weighted Automata with Queries and Counterexamples},
+author = {Weiss, Gail and Goldberg, Yoav and Yahav, Eran},
+booktitle = {Advances in Neural Information Processing Systems 32},
+editor = {H. Wallach and H. Larochelle and A. Beygelzimer and F. d\textquotesingle Alch\'{e}-Buc and E. Fox and R. Garnett},
+pages = {8558--8569},
+year = {2019},
+publisher = {Curran Associates, Inc.},
+url = {http://papers.nips.cc/paper/9062-learning-deterministic-weighted-automata-with-queries-and-counterexamples.pdf}
+}
+
 
 ### Credits
 This repository contains a sample train file from the [SPiCe](https://spice.lis-lab.fr) (Sequence Prediction Challenge) competition, 
